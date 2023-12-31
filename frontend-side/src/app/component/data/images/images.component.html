@@ -1,0 +1,25 @@
+<label *ngIf="!isUserImage && (imageToDisplay | async) as image">
+    <div class="register-image-container">
+        <img [lazyLoad]="image.toString()" alt="User image" (click)="displayPostWindow(usernameToDisplay); $event.stopPropagation()"/>
+    </div>
+</label>
+
+<div *ngIf="isUserImage && (imageToDisplay | async)" class="register-image-container">
+    <label *ngIf="(imageToDisplay | async) as image ">
+        <img [lazyLoad]="image.toString()" alt="User image"/>
+    </label>
+</div>
+
+<div class="carousel-container" *ngIf="imagesToDisplay | async">
+    <div>
+        <p class="carousel-info">{{'CURRENT_IMAGE' | translate}}:{{ currentImageIndex + 1 }}
+            /{{(imagesToDisplay | async)?.length}}</p>
+    </div>
+        <ngx-slick-carousel class="carousel carousel-container"  [config]="slideConfig"
+                            (afterChange)="onAfterChange($event)" (beforeChange)="onBeforeChange($event)">
+            <div ngxSlickItem *ngFor="let img of imagesToDisplay | async; trackBy: trackByFn" class="slide">
+                <img class="carousel-image" (click)="adjustImageSize($event)"
+                     [src]="img.toString()" alt="Post images">
+            </div>
+        </ngx-slick-carousel>
+</div>

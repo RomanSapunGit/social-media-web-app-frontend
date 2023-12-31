@@ -1,0 +1,21 @@
+<div (appClickOutside)="closeDialog()">
+<div class="draggable-style post-header-row">
+  <div class="draggable-container" mat-dialog-title
+       appDraggableDirective>
+    <button class="close-button" (click)="closeDialog()">&times;</button>
+    <div class="profile-header">
+      <h1 class="profile-text-center">{{ tagName ? tagName : username }}</h1>
+      <div *ngIf="username">
+        <app-subscriptions [targetUsername]="username"></app-subscriptions>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="post-list profile-form-post-list">
+  <app-post [tagName]="tagName"
+            [username]="username"></app-post>
+</div>
+</div>
+
+

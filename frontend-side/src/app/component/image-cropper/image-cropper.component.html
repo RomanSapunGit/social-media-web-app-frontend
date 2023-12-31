@@ -1,0 +1,42 @@
+<button class="close-button" (click)="closeDialog()">&times;</button>
+
+<br/>
+<br/>
+<button class="button" (click)="rotateLeft()">{{ 'ROTATE_LEFT' | translate }}</button>
+<button class="button" (click)="rotateRight()">{{ 'ROTATE_RIGHT' | translate }}</button>
+<button class="button" (click)="flipHorizontal()">{{ 'FLIP_HORIZONTAL' | translate }}</button>
+<button class="button" (click)="flipVertical()">{{ 'FLIP_VERTICAL' | translate }}</button>
+<br/>
+<br/>
+<button class="button" (click)="toggleContainWithinAspectRatio()">{{ containWithinAspectRatio ? ('FILL_ASPECT_RATIO' | translate) : ('CONTAIN_ASPECT_RATIO' | translate) }}</button>
+<button class="button" (click)="resetImage()">{{ 'RESET_IMAGE' | translate }}</button>
+<br/>
+<br/>
+<input [(ngModel)]="rotation" placeholder="{{ 'ROTATION' | translate }}" type="number" (keyup)="updateRotation()" class="input"/>
+<button class="button" (click)="zoomOut()">{{ 'ZOOM_OUT' | translate }}</button>
+<button class="button" (click)="zoomIn()">{{ 'ZOOM_IN' | translate }}</button>
+
+<div>
+  <image-cropper
+          [imageChangedEvent]="imageChangedEvent"
+          [maintainAspectRatio]="true"
+          [containWithinAspectRatio]="containWithinAspectRatio"
+          [aspectRatio]="1"
+          [resizeToWidth]="256"
+          [cropperMinWidth]="128"
+          [onlyScaleDown]="true"
+          [roundCropper]="true"
+          [canvasRotation]="canvasRotation"
+          [transform]="transform"
+          [alignImage]="'left'"
+          [style.display]="showCropper ? null : 'none'"
+          format="png"
+          (imageCropped)="imageCropped($event)"
+          (imageLoaded)="imageLoaded()"
+          (cropperReady)="cropperReady($event)"
+          (loadImageFailed)="loadImageFailed()"
+  ></image-cropper>
+</div>
+<p>{{ 'APPROXIMATE_RESULT' | translate }}:</p>
+<img [src]="imageUrl"/>
+<button class="button" (click)="imageCroppingFinished()">{{ 'FINISH_CHANGES' | translate }}</button>

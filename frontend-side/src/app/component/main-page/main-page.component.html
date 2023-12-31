@@ -1,0 +1,45 @@
+<app-error *ngIf="(errorMessage | async) as message"
+           [message]="message"
+           [isError]="isErrorMessage"
+           (resetError)="errorMessage.next('')"></app-error>
+
+<app-navigation-bar></app-navigation-bar>
+
+<ng-container *ngIf="!(isMobileView | async); else mobileView">
+    <div class="desktop-container">
+        <div class="user-list">
+            <app-users></app-users>
+        </div>
+        <div (window:scroll)="onWindowScroll()" class="post-list">
+            <app-post></app-post>
+            <app-scroll-to-top></app-scroll-to-top>
+        </div>
+        <div class="tag-list">
+            <app-tags></app-tags>
+        </div>
+    </div>
+</ng-container>
+
+<ng-template #mobileView>
+    <div class="container">
+        <ul>
+            <li><a routerLink="/main/users" routerLinkActive="active">Users</a></li>
+            <li><a routerLink="/main/posts" routerLinkActive="active">Posts</a></li>
+            <li><a routerLink="/main/tags" routerLinkActive="active">Tags</a></li>
+        </ul>
+        <div *ngIf="selectedList === 'users'" class="user-list">
+            <app-users></app-users>
+            <app-scroll-to-top></app-scroll-to-top>
+        </div>
+        <div *ngIf="selectedList === 'posts'" class="post-list">
+            <app-post></app-post>
+            <app-scroll-to-top></app-scroll-to-top>
+        </div>
+        <div *ngIf="selectedList === 'tags'" class="tag-list">
+            <app-tags></app-tags>
+            <app-scroll-to-top></app-scroll-to-top>
+        </div>
+    </div>
+</ng-template>
+
+<app-consent></app-consent>

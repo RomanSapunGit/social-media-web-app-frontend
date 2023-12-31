@@ -1,0 +1,10 @@
+<div >
+  <h3 class="draggable-container" mat-dialog-title
+      appDraggableDirective>
+    <button class="close-button" (click)="closeDialog()">&times;</button>
+  </h3>
+
+  <div class="error-dialog-window" *ngIf="errorMessage">
+    <span>{{ errorMessage }}</span>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<app-error *ngIf="(errorMessage | async) as message"
+           [message]="message"
+           [isError]="isErrorMessage"
+           (resetError)="errorMessage.next('')"></app-error>
+<app-navigation-bar></app-navigation-bar>
+
+<div class="about-section">
+    <p *ngFor="let paragraph of ('ABOUT_DESCRIPTION' | translate).split('\n')">{{paragraph}}</p>
+    <div class="tech-stack-images">
+        <ng-container *ngFor="let image of images; let i = index">
+            <img ngOptimizedImage [src]="image" alt="Tech Stack Image" width="400px" height="400px"
+                 *ngIf="i === currentIndex"
+                 [@imageAnimation]="i === currentIndex ? 'visible' : 'hidden'">
+        </ng-container>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+.profile-menu-options {
+  z-index: 10;
+}
+
+.profile-menu-options button {
+  display: block;
+  padding: revert;
+  border-bottom: 1px solid #ccc;
+  width: 100%;
+}
+.profile-menu-button {
+  margin-top: 8px;
+}
+.profile-menu-window button last-child {
+  border-bottom: none;
+}
+
+
+.profile-menu-options button:hover {
+  background-color: #f0f0f0;
+  color: #007bff;
+}
+
+.profile-menu-options a:hover {
+  background-color: #f0f0f0;
+  color: #007bff;
+}
+
+

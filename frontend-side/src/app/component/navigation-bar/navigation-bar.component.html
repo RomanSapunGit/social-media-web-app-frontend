@@ -1,0 +1,49 @@
+<div class="navigation-bar" *ngIf="!isMobileNavOpen">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" routerLink="/main">Social media</a>
+        <button type="button" (click)="isNavbarCollapsed = !isNavbarCollapsed"
+                [attr.aria-expanded]="!isNavbarCollapsed" aria-controls="navbarNav" aria-label="Toggle navigation">
+        </button>
+        <div *ngIf="!isMobileView">
+            <div [ngClass]="{'show': !isNavbarCollapsed}" class="navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav navbar-horizontal">
+                    <li class="nav-item active">
+                        <a class="nav-link" routerLink="/main">{{'HOME_PAGE' | translate}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/about">{{'ABOUT_PAGE' | translate}}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div *ngIf="!isMobileView" class="nav-container">
+            <button (click)="openFilterDialog()"><span class="material-icons">filter_alt</span></button>
+            <input class="input-search-field" type="text" [(ngModel)]="searchQuery"
+                   placeholder="{{'SEARCH_PLACEHOLDER' | translate}}"
+                   (ngModelChange)="searchPosts()">
+            <app-user-notification class="user-notification"></app-user-notification>
+            <img class="circular-image" [src]="userImage | async" alt="User avatar" (click)="toggleProfileMenu($event)">
+            <div [ngClass]="{'profile-menu-window': showProfileMenu}" *ngIf="showProfileMenu"
+                 (appClickOutside)="closeDropDown()">
+                <app-drop-down-menu [isProfileMenu]=true></app-drop-down-menu>
+            </div>
+        </div>
+            <app-user-notification *ngIf="isMobileView"></app-user-notification>
+        <b *ngIf="isMobileView" (click)="isMenuOpen = !isMenuOpen"><span class=" material-icons reorder">reorder</span></b>
+    </nav>
+</div>
+
+<div *ngIf="isMobileView && isMenuOpen" class="mobile-dropdown-outer">
+    <div class="circular-image-container">
+        <img class="circular-image" [src]="userImage | async" alt="User avatar"
+             (click)="displayPostWindow(username); $event.stopPropagation()">
+        <b>{{username}}</b>
+    </div>
+    <div class="options-container">
+        <input class="input-search-field-mobile" type="text" [(ngModel)]="searchQuery"
+               placeholder="{{ 'SEARCH_PLACEHOLDER' | translate }}"
+               (ngModelChange)="searchPosts()">
+        <button class="filter-button" (click)="openFilterDialog()"><span class="material-icons">filter_alt</span></button>
+    <app-drop-down-menu [isMenuOpen]="isMenuOpen" [usernameToDisplay]="username || ''" (isMenuClose)="isMenuOpen = false"></app-drop-down-menu>
+    </div>
+</div>

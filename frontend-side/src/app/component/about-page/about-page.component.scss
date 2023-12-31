@@ -1,0 +1,28 @@
+.about-section {
+  display: flow;
+  position: relative;
+  top: 55px;
+  padding: 20px;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+}
+
+.about-section p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.tech-stack-images {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tech-stack-images img {
+  width: 150px;
+  height: 150px;
+  margin: 0 10px;
+  transition: opacity 500ms ease-in-out;
+
+}

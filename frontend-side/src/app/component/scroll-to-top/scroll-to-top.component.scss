@@ -1,0 +1,22 @@
+.scroll-to-top {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 100;
+  border: none;
+  outline: none;
+  background-color: #f44336;
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 120px;
+}
+@media (max-width: 1000px) {
+  .scroll-to-top {
+    right: 20px;
+    bottom: 70px;
+    margin-left: 75%;
+    position: sticky;
+  }
+}

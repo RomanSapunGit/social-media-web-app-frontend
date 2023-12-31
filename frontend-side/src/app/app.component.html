@@ -1,0 +1,11 @@
+<router-outlet></router-outlet>
+<nav class="bottom-navbar navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler" type="button" (click)="isNavbarCollapsed = !isNavbarCollapsed"
+            [attr.aria-expanded]="!isNavbarCollapsed" aria-controls="navbarNav" aria-label="Toggle navigation">
+    </button>
+    <select class="language-selector" [(ngModel)]="selectedLanguage" (change)="switchLanguage()">
+        <option value="en">{{'ENGLISH' | translate}}</option>
+        <option value="ua">{{'UKRAINIAN' | translate}}</option>
+        <option value="pl">{{'POLISH' | translate}}</option>
+    </select>
+</nav>

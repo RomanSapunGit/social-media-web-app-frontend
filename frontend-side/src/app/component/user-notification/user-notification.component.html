@@ -1,0 +1,16 @@
+<div class="user-not-container">
+    <i (click)="toggleNotifications();$event.stopPropagation()" class="fa-solid fa-bell"></i>
+    <p>{{notificationCount | async}}</p>
+</div>
+
+<div (appClickOutside)="toggleNotifications()" class="notifications-container" *ngIf="isNotificationsOpened | async">
+    <span class="closebtn" (click)="toggleNotifications()">&times;</span>
+    <div *ngFor="let notification of notifications | async">
+        <div class="notification">
+            <a>{{notification.username}}</a>
+            <p>{{notification.message}}</p>
+            <p *ngIf="notification.postIdentifier">{{notification.postTitle}}</p>
+            <p>{{notification.notificationCreationTime | timestampDate}}</p>
+        </div>
+    </div>
+</div>

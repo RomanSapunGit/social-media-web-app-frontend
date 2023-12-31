@@ -1,0 +1,7 @@
+
+
+<div class="consent-block" *ngIf="!consent">
+    <p>We want to collect your interactions with our application</p>
+    <button class="button" (click)="handleConsent(true)">Accept</button>
+    <button class="button" (click)="handleConsent(false)">Decline</button>
+</div>

@@ -1,0 +1,112 @@
+<app-error *ngIf="message" [message]="message" (resetError)="message = ''"></app-error>
+<h2 class="text-center">{{'REGISTER_TITLE' | translate}}</h2>
+
+
+<form [formGroup]="registerForm" (ngSubmit)="register()">
+    <div *ngIf="!socialUser">
+        <div class="flex justify-center register-google-button">
+            <asl-google-signin-button type="icon" text="signup_with" theme="filled_blue">
+            </asl-google-signin-button>
+        </div>
+        <div class="div-field">
+            <input type="file" id="file-1" (change)="onFileSelected($event)" accept=".img,.png,.jpg"
+                   style="display: none;">
+            <label for="file-1">
+                <div class="register-image-container">
+                    <img *ngIf="imageUrl" [src]="imageUrl" alt="User image" class="circle-image"/>
+                    <div class="image-overlay"></div>
+                </div>
+            </label>
+        </div>
+        <div class="div-field">
+            <label class="label">{{'EMAIL' | translate}}</label>
+            <input class="input-field" type="email" formControlName="email" autocomplete="new-email"
+                   placeholder="{{ 'EMAIL_PLACEHOLDER' | translate }}">
+            <div *ngIf="registerForm.get('email')?.errors?.['required'] && registerForm.get('email')?.touched">
+                {{'EMAIL_REQUIRED' | translate}}
+            </div>
+        </div>
+        <div class="div-field">
+            <label class="label">{{'PASSWORD_LABEL' | translate}}</label>
+            <input class="input-field" type="password" formControlName="password" autocomplete="new-password"
+                   placeholder="{{'PASSWORD_PLACEHOLDER' | translate}}">
+            <div *ngIf="registerForm.get('password')?.errors?.['required'] && registerForm.get('password')?.touched">
+                {{'PASSWORD_REQUIRED' | translate}}
+            </div>
+        </div>
+        <div class="div-field">
+            <label class="label">{{'NAME_LABEL' | translate}}</label>
+            <input class="input-field" type="text" formControlName="name"
+                   placeholder="{{'NAME_PLACEHOLDER' | translate}}">
+            <div *ngIf="registerForm.get('name')?.errors?.['required'] && registerForm.get('name')?.touched">
+                {{'NAME_REQUIRED' | translate}}
+            </div>
+        </div>
+        <div class="div-field">
+            <label class="label">{{'USERNAME_LABEL' | translate}}</label>
+            <input class="input-field" type="text" formControlName="username"
+                   placeholder="{{'USERNAME_PLACEHOLDER' | translate}}">
+            <div *ngIf="registerForm.get('username')?.errors?.['required'] && registerForm.get('username')?.touched">
+                {{'USERNAME_REQUIRED' | translate}}
+            </div>
+        </div>
+
+        <div class="flex justify-center">
+            <button class="btn-login" [disabled]="registerForm.invalid"
+                    type="submit">{{'REGISTER_BUTTON' | translate}}</button>
+        </div>
+    </div>
+</form>
+
+
+<div *ngIf="socialUser">
+    <form [formGroup]="googleRegisterForm" (ngSubmit)="register()">
+        <div class="div-field">
+            <input type="file" id="file-2" (change)="onFileSelected($event)"
+                   accept=".img,.png,.jpg" style="display: none;">
+            <label for="file-2">
+                <div class="register-image-container">
+                    <img *ngIf="imageUrl" [src]="imageUrl" alt="User image" class="circle-image"/>
+                    <div class="image-overlay"></div>
+                </div>
+            </label>
+        </div>
+        <div class="div-field">
+            <label class="label">{{'EMAIL' | translate}}</label>
+            <input class="input-field" type="email" formControlName="email" autocomplete="new-email"
+                   placeholder="{{ 'EMAIL_PLACEHOLDER' | translate }}">
+            <div *ngIf="googleRegisterForm.get('email')?.errors?.['required'] && googleRegisterForm.get('email')?.touched">
+                {{'EMAIL_REQUIRED' | translate}}
+            </div>
+        </div>
+        <div class="div-field">
+            <label class="label">{{'NAME_LABEL' | translate}}</label>
+            <input class="input-field" type="text" formControlName="name"
+                   placeholder="{{'NAME_PLACEHOLDER' | translate}}">
+            <div *ngIf="googleRegisterForm.get('name')?.errors?.['required'] && googleRegisterForm.get('name')?.touched">
+                {{'NAME_REQUIRED' | translate}}
+            </div>
+        </div>
+        <div class="div-field">
+            <label class="label">{{'USERNAME_LABEL' | translate}}</label>
+            <input class="input-field" type="text" formControlName="username"
+                   placeholder="{{'USERNAME_PLACEHOLDER' | translate}}">
+            <div *ngIf="googleRegisterForm.get('username')?.errors?.['required'] && googleRegisterForm.get('username')?.touched">
+                {{'USERNAME_REQUIRED' | translate}}
+            </div>
+        </div>
+
+        <div class=" register-container">
+            <button (click)="returnToRegularRegister()" type="button"
+                    class="btn-login">{{'RETURN_TO_REGISTER' | translate}}</button>
+            <button class="btn-login" [disabled]="googleRegisterForm.invalid"
+                    type="submit">{{'FINISH_REGISTRATION' | translate}}</button>
+        </div>
+    </form>
+</div>
+
+
+<p class="text-center mt-4">
+    {{'ALREADY_HAVE_ACCOUNT' | translate}} <a routerLink="/login">{{'LOGIN' | translate}}</a> | <a
+        routerLink="/reset-password">{{'RESET_PASSWORD_LINK' | translate}}</a>
+</p>

@@ -1,0 +1,33 @@
+<app-error *ngIf="errorMessage" [message]="errorMessage" (resetError)="errorMessage = ''"></app-error>
+
+<h2 class="label">{{ 'LOGIN' | translate }}</h2>
+
+<div class="flex justify-center">
+    <asl-google-signin-button width="200" type="standard" text="signin_with" theme="filled_blue"></asl-google-signin-button>
+</div>
+
+<form [formGroup]="loginForm" (ngSubmit)="login()" class="login-form">
+    <div class="div-field">
+        <label class="label">{{ 'USERNAME_LABEL' | translate }}</label>
+        <input class="input-field" type="text" formControlName="username">
+        <div *ngIf="loginForm.get('username')?.errors?.['required'] && loginForm.get('username')?.touched">
+            {{ 'USERNAME_REQUIRED' | translate }}
+        </div>
+    </div>
+
+    <div class="div-field">
+        <label class="label">{{ 'PASSWORD_LABEL' | translate }}</label>
+        <input class="input-field" type="password" formControlName="password">
+        <div *ngIf="loginForm.get('password')?.errors?.['required'] && loginForm.get('password')?.touched">
+            {{ 'PASSWORD_REQUIRED' | translate }}
+        </div>
+    </div>
+
+    <div class="flex justify-center">
+        <button class="btn-login" [disabled]="loginForm.invalid" type="submit">{{ 'LOGIN_BUTTON' | translate }}</button>
+    </div>
+
+    <p class="text-center mt-4">
+        {{ 'NO_ACCOUNT' | translate }} <a routerLink="/register">{{ 'REGISTER_LINK' | translate }}</a> | <a routerLink="/reset-password">{{ 'RESET_PASSWORD_LINK' | translate }}</a>
+    </p>
+</form>

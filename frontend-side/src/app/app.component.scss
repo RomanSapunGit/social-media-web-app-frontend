@@ -1,0 +1,25 @@
+.bottom-navbar {
+  position: fixed;
+  bottom: 0;
+  z-index: 100;
+  background-color: #fff;
+}
+
+.language-selector {
+  margin-left: 15px;
+}
+
+@media (max-width: 1000px) {
+  .bottom-navbar {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    right: 0;
+  }
+
+  .language-selector {
+    margin-left: 0;
+    margin-top: 10px;
+    font-size: 20px;
+  }
+}

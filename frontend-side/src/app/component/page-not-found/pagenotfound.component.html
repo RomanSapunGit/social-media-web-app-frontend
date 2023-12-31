@@ -1,0 +1,11 @@
+<div [ngStyle]="{backgroundImage: 'url(' + image + ')'}" class="page-not-found-container">
+    <h2 class="text-center mt-4">{{ 'PAGE_NOT_FOUND' | translate }}</h2>
+    <p class="text-center mt-4">
+        <span>{{ 'OOPS' | translate }}</span>
+    </p>
+    <div class="flex justify-center">
+        <button class="btn-login" type="submit" routerLink="/login">
+            {{ 'LOGIN_PAGE' | translate }}
+        </button>
+    </div>
+</div>

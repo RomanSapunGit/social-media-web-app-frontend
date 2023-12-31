@@ -1,0 +1,47 @@
+<div class="comments-container" *ngIf="commentVisibility" >
+  <div class="comments-border" *ngFor="let comment of (postComments | async)?.entities">
+
+    <div *ngIf="!(savedCommentsSubject | async)?.get(comment.identifier)">
+      <mat-icon (click)="addCommentToSavedList(comment.identifier)">star_border</mat-icon>
+    </div>
+
+    <div *ngIf="(savedCommentsSubject | async)?.get(comment.identifier)">
+      <mat-icon (click)="deleteCommentFromSavedList(comment.identifier)">star</mat-icon>
+    </div>
+
+    <div class="items-info">
+      <app-image [image]="comment.userImage"></app-image>
+      <span class="username">{{ comment.username }}</span>
+      <span class="creation-time">{{ comment.creationTime | date: 'MMM d, yyyy h:mm a' }}</span>
+    </div>
+    <p>{{ comment.title }}</p>
+    <p class="description">{{ comment.description }}</p>
+    <div>
+      <button *ngIf="currentUser === comment.username" class="button"
+              (click)="updateComment(comment.identifier, comment.title, comment.description)">
+        {{'EDIT_COMMENT' | translate}}
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="!displaySavedComments">
+    <button class="button" (click)="createComment(postIdentifier)">
+      {{'CREATE_COMMENT' | translate}}
+    </button>
+  </div>
+
+<ng-container *ngIf="isCommentPaginationVisible$ | async" class="pagination">
+  <p>
+    {{ 'PAGE' | translate }} {{ currentCommentPage + 1 }}
+    {{ 'OF' | translate }} {{ (postComments | async)?.totalPages }}
+  </p>
+  <button (click)="previousCommentPage(postIdentifier)"
+          [disabled]="(currentCommentPage!== 0) &&
+           currentCommentPage + 1 === 1">
+    {{'PREVIOUS' | translate}}
+  </button>
+  <button (click)="nextCommentPage(postIdentifier)"
+          [disabled]=" currentCommentPage + 1 === ((postComments | async)?.totalPages || 0)">{{'NEXT' | translate}}
+  </button>
+</ng-container>
+</div>

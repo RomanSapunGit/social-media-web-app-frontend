@@ -1,0 +1,15 @@
+<div *ngIf="loggedInUser !== targetUsername">
+    <div *ngIf="!isUserSubscribed">
+        <button class="button" (click)="addSubscription()">{{'SUBSCRIBE' | translate}}</button>
+    </div>
+    <div *ngIf="isUserSubscribed">
+        <form (ngSubmit)="logout()">
+            <button class="nav-link" type="button" (click)="confirmUnsubscribe()">{{'SUBSCRIBED' | translate}}</button>
+        </form>
+    </div>
+    <div class="confirmation-dialog" *ngIf="isConfirmationShown">
+        <div class="message">{{'UNSUBSCRIBE_CONFIRMATION' | translate}}</div>
+        <button (click)="onConfirm()">{{'YES' | translate}}</button>
+        <button (click)="onCancel()">{{'NO' | translate}}</button>
+    </div>
+</div>

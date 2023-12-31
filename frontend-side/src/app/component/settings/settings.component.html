@@ -1,0 +1,9 @@
+<div class="draggable-container settings-header" mat-dialog-title
+     appDraggableDirective>
+    <p class="settings-text">{{'SETTINGS' | translate}}</p>
+    <button class="close-button" (click)="closeDialog()">&times;</button>
+</div>
+<div>
+    <p>{{'COLLECTING STATISTICS' | translate}}</p>
+    <button (click)="toggleConsent()">{{(consent | async) ? ('ENABLED' | translate) : ('DISABLED' | translate)}}</button>
+</div>

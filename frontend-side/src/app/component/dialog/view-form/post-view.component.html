@@ -1,0 +1,107 @@
+<div class="draggable-style">
+    <div class="draggable-container" mat-dialog-title
+         appDraggableDirective>
+        <button class="close-button" (click)="closeDialog()">&times;</button>
+    </div>
+</div>
+
+<div *ngIf="!isMobileView && (postView | async) as post">
+    <div class="social-post">
+        <div class="post-header-row">
+            <h2>{{ post.title }}</h2>
+            <div *ngIf="!(isSavedPost | async)">
+                <mat-icon (click)="addPostToSavedList(post.identifier)">star_border</mat-icon>
+            </div>
+            <div *ngIf="(isSavedPost | async)">
+                <mat-icon (click)="deletePostFromSavedList(post.identifier)">star</mat-icon>
+            </div>
+        </div>
+        <div class="items-info">
+            <ng-container *ngIf="post.userImage">
+                <app-image [usernameToDisplay]="post.username.toString()" [image]="post.userImage"></app-image>
+                <span class="username">{{ post.username }}</span>
+                <span class="creation-time">{{ post.creationTime | timestampDate }}</span>
+                <app-subscriptions [targetUsername]="post.username.toString()"></app-subscriptions>
+            </ng-container>
+        </div>
+        <app-image [images]="post.postImages"></app-image>
+        <p class="description">{{ post.description }}</p>
+        <div>
+            <button (click)="isDownvoteMade ? removeDownvote() : addDownvote()"><i
+                    class="material-icons">arrow_downward</i>
+                {{post.downvotes }}</button>
+            <button (click)="isUpvoteMade  ? removeUpvote() : addUpvote()"><i class="material-icons">arrow_upward</i>
+                {{post.upvotes }}</button>
+        </div>
+        <button (click)="isTranslated ? reverseTranslatePost() : translatePost()">{{'TRANSLATE_TO' | translate}}</button>
+        <div>
+            <p class="comments-number">{{('COMMENTS_NUMBER' | translate)}}{{ (postComments | async)?.total || 0}}</p>
+            <button class="button comments-button"  (click)="toggleCommentsVisibility(post.identifier.toString())">
+                {{ commentVisibility[post.identifier] ? ('HIDE_COMMENTS' | translate) : ('SHOW_COMMENTS' | translate) }}
+            </button>
+    </div>
+
+    </div>
+
+
+    <ng-container *ngIf="commentVisibility[post.identifier]; else notLoaded">
+        <ng-container *ngTemplateOutlet="lazyLoad"></ng-container>
+    </ng-container>
+
+    <ng-template #notLoaded></ng-template>
+
+    <ng-template #lazyLoad>
+        <app-comment [postIdentifier]="post.identifier.toString()"
+                     [commentVisibility]="commentVisibility[post.identifier]"
+                     [postComments]="postComments"
+        ></app-comment>
+    </ng-template>
+
+</div>
+<div *ngIf="isMobileView && (postView | async) as mobileViewPost">
+    <div *ngIf="!(isSavedPost | async)">
+        <mat-icon (click)="addPostToSavedList(mobileViewPost.identifier)">star_border</mat-icon>
+    </div>
+    <div *ngIf="(isSavedPost | async)">
+        <mat-icon (click)="deletePostFromSavedList(mobileViewPost.identifier)">star</mat-icon>
+    </div>
+    <div class="items-info">
+        <ng-container *ngIf="mobileViewPost.userImage">
+            <app-image [usernameToDisplay]="mobileViewPost.username.toString()" [image]="mobileViewPost.userImage"></app-image>
+            <span class="username">{{ mobileViewPost.username }}</span>
+            <span class="creation-time">{{ mobileViewPost.creationTime | timestampDate }}</span>
+            <app-subscriptions [targetUsername]="mobileViewPost.username.toString()"></app-subscriptions>
+        </ng-container>
+    </div>
+        <h2>{{ mobileViewPost.title }}</h2>
+        <app-image [images]="mobileViewPost.postImages"></app-image>
+        <p class="description">{{ mobileViewPost.description }}</p>
+    <div>
+        <button (click)="isDownvoteMade ? removeDownvote() : addDownvote()"><i
+                class="material-icons">arrow_downward</i>
+            {{mobileViewPost.downvotes }}</button>
+        <button (click)="isUpvoteMade  ? removeUpvote() : addUpvote()"><i class="material-icons">arrow_upward</i>
+            {{mobileViewPost.upvotes }}</button>
+    </div>
+    <button (click)="isTranslated ? reverseTranslatePost() : translatePost()">{{'TRANSLATE_TO' | translate}}</button>
+
+    <div class="comments-section">
+        <p class="comments-number">{{('COMMENTS_NUMBER' | translate)}}{{ (postComments | async)?.total || 0}}</p>
+        <button class="button" (click)="toggleCommentsVisibility(mobileViewPost.identifier.toString())">
+            {{ commentVisibility[mobileViewPost.identifier] ? ('HIDE_COMMENTS' | translate) : ('SHOW_COMMENTS' | translate) }}
+        </button>
+        <ng-container *ngIf="commentVisibility[mobileViewPost.identifier]; else notLoaded">
+            <ng-container *ngTemplateOutlet="lazyLoad"></ng-container>
+        </ng-container>
+
+        <ng-template #notLoaded></ng-template>
+
+        <ng-template #lazyLoad>
+            <app-comment [postIdentifier]="mobileViewPost.identifier.toString()"
+                         [commentVisibility]="commentVisibility[mobileViewPost.identifier]"
+                         [postComments]="postComments"
+            ></app-comment>
+        </ng-template>
+    </div>
+</div>
+<canvas id="canvas" class="confetti-element"></canvas>

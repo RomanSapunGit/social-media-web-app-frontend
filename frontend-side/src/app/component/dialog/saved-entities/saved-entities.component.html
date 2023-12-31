@@ -1,0 +1,15 @@
+<div (appClickOutside)="closeDialog()">
+    <div class="draggable-style">
+        <div class="draggable-container" mat-dialog-title
+             appDraggableDirective>
+        </div>
+        <button class="close-button" (click)="closeDialog()">&times;</button>
+    </div>
+    <button class="saved-entities-container" [ngClass]="{'active': currentActiveButton === 'posts'}" (click)="setActiveButton('posts')">Posts</button>
+    <button class="saved-entities-container" [ngClass]="{'active': currentActiveButton === 'comments'}" (click)="setActiveButton('comments')">Comments</button>
+    <div [ngSwitch]="currentState">
+        <app-post [displaySavedPosts]="true" *ngSwitchCase="'posts'"></app-post>
+        <app-comment [displaySavedComments]="true" [commentVisibility]="true" *ngSwitchCase="'comments'"></app-comment>
+        <div *ngSwitchDefault>No option selected</div>
+    </div>
+</div>

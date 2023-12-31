@@ -1,0 +1,26 @@
+   <div class=" content-center users-container">
+       <h2>{{ 'USERS_TITLE' | translate }}</h2>
+
+       <div  *ngFor="let user of users | async">
+           <a (click)="showPostsByUsername(user.username);$event.stopPropagation()">
+               <div class="user-container">
+                   <div class="user-image-container">
+                       <app-image [image]="user.userImage" [isUserImage]="true"
+                       ></app-image>
+                   </div>
+                   <div class="text-container">
+                       <p>{{ user.name }}</p>
+                       <p class="username">{{ user.username }}</p>
+                   </div>
+               </div>
+           </a>
+       </div>
+
+       <div *ngIf="page + 1 != totalPages && isMobileView">
+           <div infiniteScroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="1000" (scrolled)="nextUserPage()">
+               <div *ngIf="isLoading.getValue()">
+                   <p>{{'LOADING' | translate}}</p>
+               </div>
+           </div>
+       </div>
+   </div>

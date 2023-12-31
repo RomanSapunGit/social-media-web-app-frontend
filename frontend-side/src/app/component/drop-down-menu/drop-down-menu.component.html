@@ -1,0 +1,50 @@
+<div class="profile-menu-wrapper">
+  <div class="profile-menu-options" *ngIf="!isProfileMenu">
+    <button (click)="displayPostWindow(usernameToDisplay); $event.stopPropagation()">{{'PROFILE' | translate}}</button>
+  </div>
+</div>
+
+<div *ngIf="isProfileMenu">
+  <div class="profile-menu-options">
+    <button (click)="displayPostWindow(username); $event.stopPropagation()">{{'PROFILE' | translate}}</button>
+    <button (click)="displaySettings()">{{'SETTINGS' | translate}}</button>
+    <button (click)="openSavedEntitiesDialog(); $event.stopPropagation();"> {{'SAVED' | translate}}</button>
+    <form (ngSubmit)="logout()">
+      <button class="nav-link" type="button" (click)="confirmLogout()">{{'LOGOUT' | translate}}</button>
+    </form>
+    <button class="button profile-menu-button" (click)="createPost()">
+      {{'CREATE_POST' | translate}}
+    </button>
+  </div>
+</div>
+
+<div *ngIf="isMenuOpen">
+  <ul class="navbar-nav">
+    <li class="nav-item active">
+      <a class="nav-link" routerLink="/main">{{ 'HOME_PAGE' | translate }}</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/about">{{ 'ABOUT_PAGE' | translate }}</a>
+    </li>
+    <li><button (click)="openSavedEntitiesDialog(); $event.stopPropagation();"> {{'SAVED' | translate}}</button></li>
+    <li>
+      <a href="#">{{'SETTINGS' | translate}}</a>
+    </li>
+    <li>
+      <form (ngSubmit)="logout()">
+        <button class="nav-link" type="button" (click)="confirmLogout()">{{'LOGOUT' | translate}}</button>
+      </form>
+    </li>
+    <li>
+      <button class="button" (click)="createPost()">
+        {{'CREATE_POST' | translate}}
+      </button>
+    </li>
+  </ul>
+</div>
+
+<div class="confirmation-dialog" *ngIf="showConfirmation">
+  <div class="message">{{'LOGOUT_CONFIRMATION' | translate}}</div>
+  <button (click)="onConfirm()">{{'YES' | translate}}</button>
+  <button (click)="onCancel()">{{'NO' | translate}}</button>
+</div>

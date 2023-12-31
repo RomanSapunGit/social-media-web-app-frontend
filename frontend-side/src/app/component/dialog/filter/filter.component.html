@@ -1,0 +1,16 @@
+    <button class="close-button" (click)="closeDialog()">&times;</button>
+
+    <label for="post-count" class="form-label">Number of posts:</label>
+    <select id="post-count" name="pageSize" class="form-select">
+        <option value="15">15</option>
+        <option value="25">25</option>
+        <option value="30">30</option>
+    </select>
+
+    <label for="sort-by" class="form-label">Sort by:</label>
+    <select id="sort-by" class="form-select">
+        <option value="creationTime desc">Newest</option>
+        <option value="creationTime asc">Oldest</option>
+        <option value="upvotes">Most Upvotes</option>
+        <option value="downvotes">Most Downvotes</option>
+    </select>

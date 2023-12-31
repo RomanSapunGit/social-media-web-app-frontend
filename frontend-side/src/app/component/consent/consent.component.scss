@@ -1,0 +1,19 @@
+.consent-block {
+  display: grid;
+  position: fixed;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  bottom: 35px;
+  max-width: 350px;
+  border: ridge;
+}
+
+.consent-block button {
+  display: inline;
+  margin-bottom: 5px;
+}
+@media (max-width: 700px) {
+  .consent-block button {
+    margin-bottom: 15px;
+  }
+}

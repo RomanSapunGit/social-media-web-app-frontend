@@ -1,0 +1,16 @@
+.notification-dialog-box {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  padding: 10px 20px;
+  border-radius: 8px;
+  color: black;
+  background-color: #FF4136;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.2;
+  z-index: 9999;
+  display: none;
+}

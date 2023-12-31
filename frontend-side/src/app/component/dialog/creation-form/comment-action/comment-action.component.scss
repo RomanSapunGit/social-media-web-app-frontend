@@ -1,0 +1,9 @@
+.comment-action-header {
+  display: flex;
+}
+@media (max-width: 768px) {
+  .comment-action-header {
+    font-size: 15px;
+  }
+}
+

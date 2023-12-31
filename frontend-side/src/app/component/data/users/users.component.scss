@@ -1,0 +1,10 @@
+.users-container {
+  overflow: auto;
+  bottom: 30px;
+}
+@media(max-width: 1000px) {
+  .users-container {
+    padding-bottom: 40px;
+  }
+}
+

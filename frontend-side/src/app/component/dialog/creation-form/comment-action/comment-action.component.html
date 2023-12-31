@@ -1,0 +1,29 @@
+
+<h1 class="draggable-container" mat-dialog-title
+    appDraggableDirective>
+  <button class="close-button" (click)="closeDialog()">&times;</button>
+</h1>
+
+<form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+  <h2 class="comment-action-header">{{ isUpdating ? ('UPDATE_COMMENT' | translate) : ('CREATE_COMMENT' | translate) }}</h2>
+  <div class="div-field">
+    <label class="label">{{'TITLE' | translate}}</label>
+    <input class="input-field" type="text" formControlName="title" placeholder="{{'INPUT_TITLE' | translate}}">
+    <div *ngIf="commentForm.get('title')?.errors?.['required'] && commentForm.get('title')?.touched">
+      {{'TITLE_REQUIRED' | translate}}
+    </div>
+  </div>
+  <div class="div-field">
+    <label class="label">{{'DESCRIPTION' | translate}}</label>
+    <textarea class="dynamic-textarea" type="text" formControlName="description" placeholder="{{'INPUT_DESCRIPTION' | translate}}">
+    </textarea>
+    <div *ngIf="commentForm.get('description')?.errors?.['required'] && commentForm.get('description')?.touched">
+      {{'DESCRIPTION_REQUIRED' | translate}}
+    </div>
+  </div>
+  <div class="flex justify-center">
+    <button class="btn-login" [disabled]="commentForm.invalid"  type="submit">
+      {{ isUpdating ? ('UPDATE_COMMENT' | translate) : ('CREATE_COMMENT' | translate) }}
+    </button>
+  </div>
+</form>

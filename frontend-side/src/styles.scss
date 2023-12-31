@@ -1,0 +1,446 @@
+@use "@angular/material" as mat;
+@import "tailwindcss/base";
+
+@import "tailwindcss/components";
+
+@import "tailwindcss/utilities";
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import '../node_modules/@fortawesome/fontawesome-free/css/all.css';
+
+.custom-snackbar {
+  z-index: 9999;
+  position: revert;
+}
+
+
+$my-typography: mat.define-typography-config($font-family: 'Times New Roman, sans-serif');
+
+@include mat.typography-hierarchy($my-typography);
+
+$my-app-primary: mat.define-palette(mat.$blue-palette);
+$my-app-accent: mat.define-palette(mat.$green-palette);
+$my-app-warn: mat.define-palette(mat.$red-palette);
+
+
+@include mat.typography-hierarchy($my-typography);
+
+$my-app-theme: mat.define-light-theme((
+        color: (
+                primary: $my-app-primary,
+                accent: $my-app-accent,
+                warn: $my-app-warn,
+        ),
+        typography: $my-typography
+));
+
+.error-dialog-window {
+  text-align: center;
+  padding: 20px;
+  border-radius: 8px;
+  color: black;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.error-dialog-box p {
+  margin-bottom: 20px;
+}
+
+.error-dialog-box button {
+  background-color: transparent;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.error-dialog-box button:focus {
+  outline: none;
+}
+
+.error-dialog-box button:hover {
+  text-decoration: underline;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+}
+
+.btn-login {
+  border-radius: 9999px;
+  background-color: #B91C1C;
+  color: #fff;
+  padding: 0.5rem 1rem;
+}
+
+.div-field {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+  width: 20rem;
+}
+
+.div-field img {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.image-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.label {
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.input-field {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+}
+
+@media (max-width: 768px) {
+  .input-field {
+    width: auto;
+    padding: 0.2rem;
+    display: flex;
+  }
+  .div-field {
+    width: 40%;
+  }
+}
+
+.input-search-field {
+  user-select: none;
+  margin-right: 0;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+}
+
+.input-search-field-mobile {
+  user-select: none;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+}
+
+.draggable-container {
+  display: flex;
+  align-items: center;
+  cursor: move;
+  top: 0;
+  flex: 1 1 auto;
+  background-color: #B91C1C;
+  height: 10%;
+  width: 100%;
+}
+
+
+.comments-border {
+  border-bottom: 1px solid #ccc;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  max-width: inherit;
+}
+
+
+.username {
+  cursor: pointer;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+
+.creation-time {
+  color: gray;
+  font-size: 10px;
+  margin-right: 25px;
+}
+
+.social-post-container {
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media (max-width: 1000px) {
+  .username {
+    font-size: 12px;
+    font-weight: bold;
+  }
+  .button {
+    font-size: 12px;
+    height: 50%;
+  }
+  .draggable-container {
+    height: 5%;
+  }
+  .draggable-container h2 {
+    font-size: 12px;
+  }
+}
+
+.posts {
+  margin-left: 5px;
+  flex: 1 1 auto;
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  text-overflow: ellipsis;
+}
+
+.button {
+  width: unset;
+  height: unset;
+  padding: 0.1rem 0.5rem;
+  border-radius: 9999px;
+  background-color: #007bff;
+  color: #fff;
+}
+
+.button:hover {
+  background-color: gray;
+}
+
+.content {
+  position: relative;
+}
+
+.draggable-style {
+  position: sticky;
+  height: 0px;
+  top: 0;
+  z-index: 1;
+}
+
+.comments-container {
+  max-width: 500px;
+  word-break: break-word;
+  flex-direction: column;
+  height: fit-content;
+  overflow: auto;
+}
+
+.dynamic-textarea {
+  width: auto;
+  resize: vertical;
+  min-height: 60px;
+  max-height: 130px;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+}
+
+.register-image-container {
+  cursor: pointer;
+  width: 100px;
+  height: 100px;
+}
+
+@media (max-width: 1000px) {
+  .register-image-container {
+    width: 55px;
+    height: 55px;
+  }
+  .posts {
+    width: 100%;
+    max-width: 100%;
+    display: contents;
+    flex: unset;
+  }
+  .draggable-style {
+    max-height: 50px;
+  }
+}
+
+
+.register-image-container:hover .image-overlay {
+  opacity: 1;
+}
+
+.profile-menu-window {
+  position: absolute;
+  top: 50px;
+  right: 10px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  z-index: 9999;
+}
+
+.profile-menu-options a {
+  position: relative;
+  display: block;
+  padding: 8px;
+  border-bottom: 1px solid #ccc;
+}
+
+.profile-menu-options a:hover {
+  background-color: #f0f0f0;
+  color: #007bff;
+}
+
+.dropdown-window {
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+}
+
+.no-select {
+  user-select: none;
+}
+
+.confirmation-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+.confirmation-dialog .message {
+  margin-bottom: 20px;
+  font-size: 18px;
+  color: #333333;
+}
+
+.confirmation-dialog button {
+  padding: 10px 20px;
+  border-radius: 4px;
+  border: none;
+  color: #ffffff;
+  background-color: #f44336;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.confirmation-dialog button:hover {
+  background-color: #d32f2f;
+}
+
+.confirmation-dialog button + button {
+  margin-left: 10px;
+}
+
+.confirmation-dialog .close-button {
+  background-color: transparent;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.table-type-border {
+  border: 1px solid #ccc;
+}
+
+.user-list {
+  border: #333333 1px solid;
+  background-color: #f5f5f5;
+  border-radius: 20px;
+  position: sticky;
+  user-select: none;
+  top: 55px;
+  margin-top: 55px;
+  width: 200px;
+}
+
+@media (max-width: 1000px) {
+  .user-list {
+    top: unset;
+    transform: translateY(55px);
+    margin-top: 35px;
+    position: unset;
+  }
+}
+
+.user-list a {
+  cursor: pointer;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  font-size: 35px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+
+.user-container {
+  display: flex;
+  align-items: center;
+}
+
+.text-container {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-image-container {
+  z-index: 100;
+  margin-right: 10px;
+}
+
+.container i {
+  transform: unset;
+  margin-right: 5px;
+}
+
+.container-border {
+  border: 1px solid #ccc;
+}
+
+.content-center {
+
+  margin-left: 10%;
+}
+
+.post {
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  padding: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 50px;
+}

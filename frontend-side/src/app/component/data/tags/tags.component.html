@@ -1,0 +1,15 @@
+<div class="tags-container content-center">
+    <h2>{{'TAGS_TITLE' | translate}}</h2>
+    <div *ngFor="let tag of tags | async">
+        <a (click)="showPostsByTag(tag.name);$event.stopPropagation()">
+            <p class="username">{{tag.name}}</p>
+        </a>
+    </div>
+    <div *ngIf="page + 1 != totalPages && isMobileView">
+        <div infiniteScroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="1000" (scrolled)="nextTagPage()">
+            <div *ngIf="isLoading.getValue()">
+                <p>{{'LOADING' | translate}}</p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+<div class="posts" *ngFor="let post of (posts | async)?.entities">
+    <div class="post">
+        <div class="post-header" (click)="displaySinglePost(post.identifier)">
+            <div class="user-info">
+                <ng-container *ngIf="post.userImage">
+                    <app-image [usernameToDisplay]="post.username.toString()" [image]="post.userImage"></app-image>
+                    <span class="username">{{ post.username }}</span>
+                    <span class="creation-time">{{ post.creationTime | timestampDate }}</span>
+                </ng-container>
+            </div>
+            <p class="username">{{ post.title }}</p>
+        </div>
+        <div class="post-content">
+            <app-image [images]="post.postImages"></app-image>
+        </div>
+        <p (click)="displaySinglePost(post.identifier)" class="description-posts">{{ post.description }}</p>
+        <div class="post-actions">
+            <div>
+                <button (click)="isDownVoteMade ? removeDownvote(post.identifier) :
+                 addDownvote(post.identifier)">
+                    <i class="material-icons">arrow_downward</i> {{post.downvotes }}</button>
+                <button (click)="isUpvoteMade ? removeUpvote(post.identifier) : addUpvote(post.identifier)">
+                    <i class="material-icons">arrow_upward</i> {{post.upvotes }}</button>
+            </div>
+            <button *ngIf="currentUser === post.username" class="button"
+                    (click)="updatePost(post.identifier, post.title, post.description, post.postImages);$event.stopPropagation()">
+                {{'EDIT_POST' | translate}}
+            </button>
+        </div>
+    </div>
+</div>
+<div *ngIf="currentPostPage.getValue() + 1 != (posts | async)?.totalPages">
+    <div infiniteScroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="1000" (scrolled)="nextPostPage()">
+        <div *ngIf="isLoading.getValue()">
+            <p>{{'LOADING' | translate}}</p>
+        </div>
+    </div>
+</div>
+<div *ngIf="(posts | async)?.entities?.length === 0 && !isLoading.getValue() ">
+    <p>{{'Current ' + (username ? 'user: ' + username : 'site') + ('HAS_NOTHING_TO_SHOW' | translate)}}</p>
+</div>
+<div class="subscription-posts-end" *ngIf="isUserSubscribed.getValue() && currentPostPage.getValue() +1 === totalPages.getValue()
+&& !isLoading.getValue()">
+    <h3>{{'SUBSCRIPTION_POSTS_END' | translate}}</h3>
+    <button class="button" (click)="onPostChange()">{{'RETURN_TO_REGULAR_POSTS' | translate}}</button>
+</div>
